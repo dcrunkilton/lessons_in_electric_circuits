@@ -6,10 +6,11 @@
 # modified  02/01/2006 (DC) - ../bin now included in ACsrc.tar.gz, ACtiny.tar.gz
 # modified  02/27/2006 (DC) - Added -z to dvips command in AC.ps target,
 # modified  10/01/2006 (DC) - Added Bibliography chapter latex, html; pending: txt,tex groff
-# modified 05/28/2007 (DC) -Removed  bibliography to .html, .latex pending for others; .tex, .txt, etc
-# modified 10/03/2008 (DC) -Added sml2latx.sed, sml2html.sed to Latex and html sections--
+# modified  05/28/2007 (DC) - Removed  bibliography to .html, .latex pending for others; .tex, .txt, etc
+# modified  10/03/2008 (DC) - Added sml2latx.sed, sml2html.sed to Latex and html sections--
 #                           -- to for rebuild for changes to these .sed files.
-# -see hyperref in hi.latex for pdf hyperlinks.
+#                           - see hyperref in hi.latex for pdf hyperlinks.
+# modified 08/29/2014 (DC)  - Added ebook suppoer upub, mobi per Sven Stucki
 
 # 02/10/2006 Failed attempt to set TEXINPUTS path
 #Add on to TEX PATH (for tocvsec2.sty) AC.ps:
@@ -109,11 +110,20 @@ html : $(SRC) sml2html.sed
 	make AC_A2.html
 	make AC_A3.html
 
+#simplify the indexpage for mobi
+index_mobi: index.html 
+	cat index.html |  sed -e "s+<p></p>++g" \
+	-e "s+ - Table of Contents++" \
+	-e '/!!!!!!!!!!!!!!!!!/,/<a href="..\/index.htm"/d' \
+	-e "s+h3>+p>+g" \
+	-e "s+h2>+p>+g" \
+	-e "/Master Index/d"  > index_mobi.html
+
 
 # Converts SubML to html, then into mobi
 epub: index_mobi.html
 	git checkout -- hi_*.html bye_*.html
-	-mkdir backup
+	mkdir backup
 	# edit header from individual chapters
 	cp hi_*.html backup/
 	sed -i '/<a/d' hi_*.html
