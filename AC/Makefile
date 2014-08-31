@@ -688,6 +688,7 @@ ACtiny.tar.gz: $(SRC)
             next.jpg \
             ps.* \
             pdf.* \
+            book-02.png \
             src1.* \
             src2.* \
             *.lps \
