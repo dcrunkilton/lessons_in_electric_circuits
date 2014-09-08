@@ -120,10 +120,10 @@ index_mobi: index.html
 	-e "/Master Index/d"  > index_mobi.html
 
 
-# Converts SubML to html, then into mobi
+# Converts SubML to html, then into epub and mobi
 epub: index_mobi.html
-	git checkout -- hi_*.html bye_*.html
-	mkdir backup
+	#git checkout -- hi_*.html bye_*.html
+	if [ !  -d trash ]; then mkdir trash; fi
 	# edit header from individual chapters
 	cp hi_*.html backup/
 	sed -i '/<a/d' hi_*.html
@@ -140,11 +140,10 @@ epub: index_mobi.html
 	sed -i -n '1h;1!H;$${;g;s/<h1>\(.*\)<\/h1>.*<h1>\(\&nbsp;\)*\(.*\)<\/h1>/<h1>\1: \U\3\L<\/h1>/g;p;}' AC_*.html
 	# generate epub output
 	ebook-convert index_mobi.html AC.epub --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --no-default-epub-cover
-
-
-# Create mobi output (takes longer than epub)
-mobi: epub
-	ebook-convert index_mobi.html AC.mobi --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2
+	ebook-convert index_mobi.html AC.mobi --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --mobi-toc-at-start 
+	#restore hi_ bye_ back to original for normal html make
+	cp backup/hi_*.html .
+	cp backup/bye_*.html .
 
 
 # Converts SubML source into TeX source
