@@ -1169,7 +1169,7 @@ An AND gate is shown in Figure<ref>03461.png above</ref>. Logic gates have input
 </para>
 
 <para>
-A two input OR gate composed of a pair of diodes is shown in Figure<ref>0a3462.png below</ref>. If both inputs are logic low at (a) as simulated by both switches ``downward,'' the output Y is pulled low by the resistor. This logic zero is recorded in the first line of the truth table at (c). If one of the inputs is high as at (b), or the other input is high, or both inputs high, the diode(s) conduct(s), pulling the output Y high. These results are reordered in the second through fourth lines of the truth table. Summary: any input ``high'' is a high out at Y.
+A two input OR gate composed of a pair of diodes is shown in Figure<ref>03462.png below</ref>. If both inputs are logic low at (a) as simulated by both switches ``downward,'' the output Y is pulled low by the resistor. This logic zero is recorded in the first line of the truth table at (c). If one of the inputs is high as at (b), or the other input is high, or both inputs high, the diode(s) conduct(s), pulling the output Y high. These results are reordered in the second through fourth lines of the truth table. Summary: any input ``high'' is a high out at Y.
 </para>
 
 <image>03462.png<caption>OR gate: (a) First line, truth table (TT). (b) Third line TT. (d) Logical OR of power line supply and back-up battery.</caption></image>
@@ -1654,7 +1654,7 @@ Dropping resistor values need not be precise for LED circuits.  Suppose we were 
 </para>
 
 <para>
-Multiple LEDs are sometimes required, say in lighting. If LEDs are operated in parallel, each must have its own current limiting resistor as in Figure<ref>0396.png below</ref> (a) to ensure  currents dividing more equally.
+Multiple LEDs are sometimes required, say in lighting. If LEDs are operated in parallel, each must have its own current limiting resistor as in Figure<ref>03296.png below</ref> (a) to ensure  currents dividing more equally.
 <comment>split for double ref</comment>
 However, it is more efficient to operate LEDs in series (Figure<ref>03296.png below</ref> (b)) with a single dropping resistor. As the number of series LEDs increases the series resistor value must decrease to maintain current, to a point. The number of LEDs in series (V<subscript>f</subscript>) cannot exceed the capability of the power supply.
 <comment>split for double ref</comment>

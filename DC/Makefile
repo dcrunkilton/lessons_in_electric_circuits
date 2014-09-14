@@ -130,8 +130,8 @@ epub: $(SRC)
 	# multiline substitution like in http://austinmatzko.com/2008/04/26/sed-multi-line-search-and-replace/
 	sed -i -n '1h;1!H;$${;g;s/<h1>\(.*\)<\/h1>.*<h1>\(\&nbsp;\)*\(.*\)<\/h1>/<h1>\1: \U\3\L<\/h1>/g;p;}' DC_*.html
 	# generate epub output
-	ebook-convert index_mobi.html DC.epub --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --no-default-epub-cover
-	ebook-convert index_mobi.html DC.mobi --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --mobi-toc-at-start 
+	ebook-convert index_mobi.html DC.epub --breadth-first --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --no-default-epub-cover
+	ebook-convert index_mobi.html DC.mobi --breadth-first --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --mobi-toc-at-start 
 	#restore hi_ bye_ back to original for normal html make
 	cp backup/hi_*.html .
 	cp backup/bye_*.html .

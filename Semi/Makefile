@@ -7,6 +7,7 @@
 # modified 04/39/2007 (DC) -Removed  bibliography to .html, .latex pending for others; .tex, .txt, etc
 # modified 10/03/2008 (DC) -Added sml2latx.sed, sml2html.sed to Latex and html sections--
 #                           -- to for rebuild for changes to these .sed files.
+# modified 09/13/2014 (DC)  - Added ebook support for upub, mobi per Sven Stucki
 
 #This shrinks screen capture height eps:
 YRES=108
@@ -89,6 +90,42 @@ html : $(SRC)
 	make SEMI_A2.html
 	make SEMI_A3.html
 
+
+#simplify the indexpage for mobi
+index_mobi: index.html 
+	cat index.html |  sed -e "s+<p></p>++g" \
+	-e "s+ - Table of Contents++" \
+	-e '/!!!!!!!!!!!!!!!!!/,/<a href="..\/index.htm"/d' \
+	-e "s+h3>+p>+g" \
+	-e "s+h2>+p>+g" \
+	-e "/Master Index/d"  > index_mobi.html
+
+
+# Converts SubML to html, then into epub and mobi
+epub: $(SRC)
+	make index_mobi
+	#git checkout -- hi_*.html bye_*.html
+	if [ !  -d backup ]; then mkdir backup; fi
+	# edit header from individual chapters
+	cp hi_*.html backup/
+	sed -i '/<a/d' hi_*.html
+	sed -i '/<body>/d' hi_*.html
+	sed -i '/<hr>/d' hi_*.html
+	sed -i '/<h1>Lessons/d' hi_*.html
+	# remove footer from chapters
+	cp bye_*.html backup/
+	echo bye_*.html | xargs -n1 cp /dev/null
+	# regenerate HTML
+	make -B html
+	# merge the two consecutive <h1> chapter headers
+	# multiline substitution like in http://austinmatzko.com/2008/04/26/sed-multi-line-search-and-replace/
+	sed -i -n '1h;1!H;$${;g;s/<h1>\(.*\)<\/h1>.*<h1>\(\&nbsp;\)*\(.*\)<\/h1>/<h1>\1: \U\3\L<\/h1>/g;p;}' SEMI_*.html
+	# generate epub output
+	ebook-convert index_mobi.html SEMI.epub --breadth-first --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --no-default-epub-cover
+	ebook-convert index_mobi.html SEMI.mobi --breadth-first --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --mobi-toc-at-start 
+	#restore hi_ bye_ back to original for normal html make
+	cp backup/hi_*.html .
+	cp backup/bye_*.html .
 
 
 # Converts SubML source into TeX source
@@ -592,7 +629,7 @@ SEMItiny.tar.gz: $(SRC)
             0*.eps \
             1*.eps \
             2*.png \
-            4*.jpg \
+            4*.[jp][pn]g \
             5*.jpg \
             previous.jpg \
             contents.jpg \

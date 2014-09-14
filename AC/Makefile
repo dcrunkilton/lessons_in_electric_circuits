@@ -10,7 +10,7 @@
 # modified  10/03/2008 (DC) - Added sml2latx.sed, sml2html.sed to Latex and html sections--
 #                           -- to for rebuild for changes to these .sed files.
 #                           - see hyperref in hi.latex for pdf hyperlinks.
-# modified 08/29/2014 (DC)  - Added ebook suppoer upub, mobi per Sven Stucki
+# modified 08/29/2014 (DC)  - Added ebook support for upub, mobi per Sven Stucki
 
 # 02/10/2006 Failed attempt to set TEXINPUTS path
 #Add on to TEX PATH (for tocvsec2.sty) AC.ps:
@@ -121,9 +121,10 @@ index_mobi: index.html
 
 
 # Converts SubML to html, then into epub and mobi
-epub: index_mobi.html
+epub: $(SRC)
+	make index_mobi
 	#git checkout -- hi_*.html bye_*.html
-	if [ !  -d trash ]; then mkdir trash; fi
+	if [ !  -d backup ]; then mkdir backup; fi
 	# edit header from individual chapters
 	cp hi_*.html backup/
 	sed -i '/<a/d' hi_*.html
@@ -139,8 +140,8 @@ epub: index_mobi.html
 	# multiline substitution like in http://austinmatzko.com/2008/04/26/sed-multi-line-search-and-replace/
 	sed -i -n '1h;1!H;$${;g;s/<h1>\(.*\)<\/h1>.*<h1>\(\&nbsp;\)*\(.*\)<\/h1>/<h1>\1: \U\3\L<\/h1>/g;p;}' AC_*.html
 	# generate epub output
-	ebook-convert index_mobi.html AC.epub --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --no-default-epub-cover
-	ebook-convert index_mobi.html AC.mobi --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --mobi-toc-at-start 
+	ebook-convert index_mobi.html AC.epub --breadth-first --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --no-default-epub-cover
+	ebook-convert index_mobi.html AC.mobi --breadth-first --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --mobi-toc-at-start 
 	#restore hi_ bye_ back to original for normal html make
 	cp backup/hi_*.html .
 	cp backup/bye_*.html .

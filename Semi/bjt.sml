@@ -1990,7 +1990,7 @@ A trend should be evident in  Table <ref>bjt6.tbl above</ref>.  With increases i
 </para>
 
 <para>
-The last three lines of Table <ref>bjt.tbl above</ref>(right) show the <bold>I(v1)/Iin</bold>  current gain of 0.99. (The last two lines look invalid.)  This makes sense for <beta>=100; <alpha>= <beta>/(<beta>+1), <alpha>=0.99=100/(100-1).   The combination of low current gain (always less than 1) and somewhat unpredictable voltage gain conspire against the common-base design, relegating it to few practical applications.
+The last three lines of Table <ref>bjt6.tbl above</ref>(right) show the <bold>I(v1)/Iin</bold>  current gain of 0.99. (The last two lines look invalid.)  This makes sense for <beta>=100; <alpha>= <beta>/(<beta>+1), <alpha>=0.99=100/(100-1).   The combination of low current gain (always less than 1) and somewhat unpredictable voltage gain conspire against the common-base design, relegating it to few practical applications.
 </para>
 
 <para>
@@ -2516,7 +2516,7 @@ v1 4 0 dc 15
 
 
 <para>
-The new resistor values of 6 k<OMEGA> and 4 k<OMEGA> (R<subscript>2</subscript> and R<subscript>3</subscript>, respectively) in Figure<ref>023014.png above</ref> results in class A waveform reproduction, just the way we wanted.
+The new resistor values of 6 k<OMEGA> and 4 k<OMEGA> (R<subscript>2</subscript> and R<subscript>3</subscript>, respectively) in Figure<ref>23014.png above</ref> results in class A waveform reproduction, just the way we wanted.
 </para>
 
 <itemize>
