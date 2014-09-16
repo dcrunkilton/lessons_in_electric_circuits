@@ -1225,7 +1225,7 @@ There are some differences now that we are dealing with something  new, maxterms
 </para>
 
 <para>
-It also looks strange that <bold>(A+B+C)</bold> is mapped into the cell <bold>000</bold>. For the equation <bold>Out=(A+B+C)=0</bold>, all three variables <bold>(A, B, C)</bold> must individually be equal to <bold>0</bold>. Only <bold>(0+0+0)=0</bold> will equal <bold>0</bold>. Thus we place our sole <bold>0</bold> for minterm <bold>(A+B+C)</bold> in cell  <bold>A,B,C=000</bold> in the K-map, where the inputs are all<bold>0</bold> . This is the only case which will give us a <bold>0</bold> for our maxterm. All other cells contain <bold>1</bold>s because any input values other than (<bold>(0,0,0)</bold> for <bold>(A+B+C)</bold> yields <bold>1</bold>s upon evaluation.
+It also looks strange that <bold>(A+B+C)</bold> is mapped into the cell <bold>000</bold>. For the equation <bold>Out=(A+B+C)=0</bold>, all three variables <bold>(A, B, C)</bold> must individually be equal to <bold>0</bold>. Only <bold>(0+0+0)=0</bold> will equal <bold>0</bold>. Thus we place our sole <bold>0</bold> for maxterm <bold>(A+B+C)</bold> in cell  <bold>A,B,C=000</bold> in the K-map, where the inputs are all<bold>0</bold> . This is the only case which will give us a <bold>0</bold> for our maxterm. All other cells contain <bold>1</bold>s because any input values other than (<bold>(0,0,0)</bold> for <bold>(A+B+C)</bold> yields <bold>1</bold>s upon evaluation.
 </para>
 
 <para>

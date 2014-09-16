@@ -8,6 +8,8 @@
 # modified 01/15/2010 (DC) -Added 555.sml
 # modified 01/15/2010 (DC) -Added png to eps processing for 45???.png images
 #                           Some authors send me .png instead of prefered .eps
+# modified 08/29/2014 (DC)  - Added ebook support for upub, mobi per Sven Stucki
+#
 # This shrinks screen capture height eps:
 YRES=108
 
@@ -66,6 +68,43 @@ html : $(SRC) sml2html.sed
 	make EXP_A1.html
 	make EXP_A2.html
 	make EXP_A3.html
+
+
+#simplify the indexpage for mobi
+index_mobi: index.html 
+	cat index.html |  sed -e "s+<p></p>++g" \
+	-e "s+ - Table of Contents++" \
+	-e '/!!!!!!!!!!!!!!!!!/,/<a href="..\/index.htm"/d' \
+	-e "s+h3>+p>+g" \
+	-e "s+h2>+p>+g" \
+	-e "/Master Index/d"  > index_mobi.html
+
+
+# Converts SubML to html, then into epub and mobi
+epub: $(SRC)
+	make index_mobi
+	#git checkout -- hi_*.html bye_*.html
+	if [ !  -d backup ]; then mkdir backup; fi
+	# edit header from individual chapters
+	cp hi_*.html backup/
+	sed -i '/<a/d' hi_*.html
+	sed -i '/<body>/d' hi_*.html
+	sed -i '/<hr>/d' hi_*.html
+	sed -i '/<h1>Lessons/d' hi_*.html
+	# remove footer from chapters
+	cp bye_*.html backup/
+	echo bye_*.html | xargs -n1 cp /dev/null
+	# regenerate HTML
+	make -B html
+	# merge the two consecutive <h1> chapter headers
+	# multiline substitution like in http://austinmatzko.com/2008/04/26/sed-multi-line-search-and-replace/
+	sed -i -n '1h;1!H;$${;g;s/<h1>\(.*\)<\/h1>.*<h1>\(\&nbsp;\)*\(.*\)<\/h1>/<h1>\1: \U\3\L<\/h1>/g;p;}' EXP_*.html
+	# generate epub output
+	ebook-convert index_mobi.html EXP.epub --breadth-first --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --no-default-epub-cover
+	ebook-convert index_mobi.html EXP.mobi --breadth-first --authors "Tony R. Kuphaldt" --language en --level1-toc //h:h1 --level2-toc //h:h2 --mobi-toc-at-start 
+	#restore hi_ bye_ back to original for normal html make
+	cp backup/hi_*.html .
+	cp backup/bye_*.html .
 
 
 # Converts SubML source into TeX source

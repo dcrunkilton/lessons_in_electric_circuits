@@ -1152,7 +1152,7 @@ Strip the enamel off 1-inch of the ends of magnet wire leads if not already done
 
 
 <para>
-Refer to both the schematic diagram and the illustration for assembly.   Note that the coils are mounted at right angles. L2, the smaller coil is wired to both sides of the 120 Vac line. The capacitor is wired in series with the wider coil L1. The capacitor provides a leading phase shift of the current with respect to voltage. The schematic and illustration show no power switch or fuse. Add these additions are recommended.
+Refer to both the schematic diagram and the illustration for assembly.   Note that the coils are mounted at right angles. L2, the smaller coil is wired to both sides of the 120 Vac line. The capacitor is wired in series with the wider coil L1. The capacitor provides a leading phase shift of the current with respect to voltage. The schematic and illustration show no power switch or fuse. These additions are recommended.
 </para>
 
 

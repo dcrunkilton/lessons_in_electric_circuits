@@ -442,7 +442,8 @@ NOTE: This equation applies to a non-resistive LC circuit.  In circuits containi
 <item><superscript>o</superscript>F = (<superscript>o</superscript>C)(9/5) + 32</item>
 <item><superscript>o</superscript>C = (<superscript>o</superscript>F - 32)(5/9)</item>
 <item><superscript>o</superscript>R = <superscript>o</superscript>F + 459.67</item>
-<item><superscript>o</superscript>K = <superscript>o</superscript>C + 273.15</item>
+<item><K = <superscript>o</superscript>C + 273.15</item>
+<item><superscript>o</superscript>K is obsolete having been replaced by K (Kelvins). </item>
 </itemize>
 
 <bigspace>
