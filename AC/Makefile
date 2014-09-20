@@ -127,12 +127,12 @@ epub: $(SRC)
 	if [ !  -d backup ]; then mkdir backup; fi
 	# edit header from individual chapters
 	cp hi_*.html backup/
+	cp bye_*.html backup/
 	sed -i '/<a/d' hi_*.html
 	sed -i '/<body>/d' hi_*.html
 	sed -i '/<hr>/d' hi_*.html
 	sed -i '/<h1>Lessons/d' hi_*.html
 	# remove footer from chapters
-	cp bye_*.html backup/
 	echo bye_*.html | xargs -n1 cp /dev/null
 	# regenerate HTML
 	make -B html

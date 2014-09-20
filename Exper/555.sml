@@ -980,7 +980,7 @@ Gently take a sharp blade and scrap the enamel off each end of the two leads.  T
 </para>
 
 <para>
-Here is what the one I made looked like: Figure<ref>45034.png below</ref>.</para>
+Here is what the one I made looked like: Figure<ref>45034.jpg below</ref>.</para>
 
 <image>45034.jpg<caption></caption></image>
 
